@@ -1,0 +1,179 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_patientContract",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_registrarAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint40",
+                "name": "_ndc",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint8",
+                "name": "_quantity",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint8",
+                "name": "_refills",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "party",
+                "type": "address"
+            }
+        ],
+        "name": "addPermissionedPrescriber",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint8",
+                "name": "fillCount",
+                "type": "uint8"
+            }
+        ],
+        "name": "fillPrescription",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "fillSigRequired",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "p",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "prescriber",
+                "type": "address"
+            },
+            {
+                "internalType": "uint40",
+                "name": "ndc",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint8",
+                "name": "quantity",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint8",
+                "name": "refills",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint8",
+                "name": "refillCount",
+                "type": "uint8"
+            }
+        ],
+        "name": "refillPrescription",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "refillSigRequired",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "registrar",
+        "outputs": [
+            {
+                "internalType": "contract Registrar",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "party",
+                "type": "address"
+            }
+        ],
+        "name": "removePermissionedPrescriber",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "requestFill",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "requestRefill",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
