@@ -1,5 +1,5 @@
 from django.db import models
-from app.users.models import CustomUser  # Assuming the user model is located in users/models.py
+from users.models import CustomUser  # Assuming the user model is located in users/models.py
 
 class Transaction(models.Model):
     transaction_hash = models.CharField(max_length=255, unique=True)

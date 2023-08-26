@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.app.settings')
 
