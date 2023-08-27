@@ -77,6 +77,9 @@ class Simulator():
         """
         # If the patient does not have a prescriber
         if not patient.get_prescriptions():
+            if not self.role_pool['prescribers']:
+                print("No prescribers available!")
+                return
             # Patient selects and permissions a random prescriber
             prescriber = random.choice(self.role_pool['prescribers'])
 
@@ -92,6 +95,10 @@ class Simulator():
                 quantity,
                 refills
             )
+
+            if not self.role_pool['pharmacies']:
+                print("No Pharmacies available!")
+                return
 
             # Patient selects and permissions a random pharmacy
             pharmacy = random.choice(self.role_pool['pharmacies'])

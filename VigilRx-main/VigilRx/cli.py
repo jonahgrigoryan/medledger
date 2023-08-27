@@ -2,13 +2,12 @@ import os
 import sys
 import subprocess
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.app.settings')
+sys.path.append('/Users/jonahkesoyan/Downloads/MedLedger/VigilRx-main/VigilRx/app')
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 
 import django
 django.setup()
-
-sys.path.append('/Users/jonahkesoyan/Downloads/MedLedger/VigilRx-main/')
-
 
 from bridge.models import Patient, Prescriber, Pharmacy, Registrar
 from bridge.simulate import Simulator
@@ -18,7 +17,6 @@ import time
 import solc
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 
 def compile():
     """Compiles all Solidity smart contracts.
@@ -87,7 +85,8 @@ def run_server():
     and a Registrar smart contract deployed.
     """
     cwd = os.getcwd()
-    subprocess.run(["python", "app/manage.py", "runserver"], cwd=cwd)
+    path = os.path.join(cwd, 'app', 'manage.py')
+    os.system(f'osascript -e \'tell app "Terminal" to do script "python {path} runserver"\'')
 
 
 
