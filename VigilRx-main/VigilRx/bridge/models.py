@@ -2,8 +2,8 @@ import sys
 import time
 import datetime
 #from web3 import Web3
-import bridge_module
-from bridge_module import w3
+from . import bridge_module
+from .bridge_module import w3
 from app.dashboard.models import Transaction
 
 

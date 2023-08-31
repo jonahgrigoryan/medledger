@@ -4,12 +4,11 @@ import subprocess
 
 sys.path.append('/Users/jonahkesoyan/Downloads/MedLedger/VigilRx-main/VigilRx/app')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
-
 import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.app.settings')
 django.setup()
-
-from bridge.models import Patient, Prescriber, Pharmacy, Registrar
+#from bridge.models import Patient, Prescriber, Pharmacy, Registrar
+from bridge.models import Registrar
 from bridge.simulate import Simulator
 import argparse
 import json
@@ -81,13 +80,12 @@ def run_ganache():
 
 
 def run_server():
-    """Runs the Django web app server locally. Ganache must be running
+    """Runs the Django web app server locally. Ganache must be ruwnning
     and a Registrar smart contract deployed.
     """
     cwd = os.getcwd()
     path = os.path.join(cwd, 'app', 'manage.py')
     os.system(f'osascript -e \'tell app "Terminal" to do script "python {path} runserver"\'')
-
 
 
 def bridge():
