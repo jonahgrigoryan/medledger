@@ -109,6 +109,7 @@ def build():
     blockchain locally, deploys a new registrar contract, and runs the
     Django web app server locally.
     """
+    print("testing")
     clean()
     compile()
     run_ganache()
