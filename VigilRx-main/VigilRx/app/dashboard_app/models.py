@@ -1,7 +1,10 @@
 from django.db import models
 from users.models import CustomUser  # Assuming the user model is located in users/models.py
+from django.utils import timezone
 
 class Transaction(models.Model):
+
+    
     transaction_hash = models.CharField(max_length=255, unique=True)
     gas_usage = models.IntegerField()
     block_number = models.IntegerField()

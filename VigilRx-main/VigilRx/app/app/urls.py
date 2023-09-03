@@ -27,7 +27,9 @@ urlpatterns = [
     path('account/', user_views.account, name='account'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('base.html', dashboard_app_views.base_view, name='base-view'),
-
+    #path('base/', dashboard_app_views.base_view, name='base-view'),
+    path('home/', dashboard_app_views.home, name='dashboard_app-home'),
+    
+    
     path('', include('dashboard_app.urls')),
 ]

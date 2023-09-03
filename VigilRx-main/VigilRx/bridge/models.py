@@ -101,7 +101,7 @@ class Registrar():
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -131,7 +131,7 @@ class Registrar():
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -263,7 +263,7 @@ class Patient(Roles):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -290,7 +290,7 @@ class Patient(Roles):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -322,7 +322,7 @@ class Patient(Roles):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -380,7 +380,7 @@ class Patient(Roles):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -461,7 +461,7 @@ class Prescriber(Provider):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -496,7 +496,7 @@ class Prescriber(Provider):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -560,7 +560,7 @@ class Pharmacy(Provider):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -592,7 +592,7 @@ class Pharmacy(Provider):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -619,7 +619,7 @@ class Pharmacy(Provider):
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
 
         self.runtime['request_refill'] += time.time() - start
