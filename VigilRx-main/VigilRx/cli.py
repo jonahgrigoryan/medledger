@@ -2,7 +2,8 @@ import os
 import sys
 import subprocess
 
-sys.path.append('/Users/jonahkesoyan/Downloads/MedLedger/VigilRx-main/VigilRx/app')
+print(sys.path)
+#sys.path.append('/Users/jonahkesoyan/Downloads/MedLedger/VigilRx-main/VigilRx/app')
 
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.app.settings')
@@ -85,7 +86,7 @@ def run_server():
     """
     cwd = os.getcwd()
     path = os.path.join(cwd, 'app', 'manage.py')
-    os.system(f'osascript -e \'tell app "Terminal" to do script "python {path} runserver"\'')
+    os.system(f'osascript -e \'tell app "Terminal" to do script "source /Users/jonahkesoyan/Downloads/MedLedger/venv/bin/activate && python {path} runserver"\'')
 
 
 def bridge():

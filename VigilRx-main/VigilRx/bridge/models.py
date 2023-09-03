@@ -2,9 +2,10 @@ import sys
 import time
 import datetime
 #from web3 import Web3
-from . import bridge_module
-from .bridge_module import w3
-from app.dashboard.models import Transaction
+from bridge import bridge_module
+from bridge.bridge_module import w3
+from django.utils import timezone
+
 
 
 # Placeholder for gas settings (adjust as needed)
@@ -17,6 +18,7 @@ class Registrar():
     """
 
     def __init__(self):
+        
         self.personal_address = w3.eth.accounts[0]
         self.sender = {'from': self.personal_address}
 
@@ -28,6 +30,7 @@ class Registrar():
             tx_hash = template.constructor().transact(self.sender)
             tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
+            from dashboard_app.models import Transaction
             # Save transaction details to the database
             transaction = Transaction(
                 transaction_hash=tx_hash.hex(),
@@ -60,11 +63,13 @@ class Registrar():
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
+        from dashboard_app.models import Transaction
+
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
             block_number=tx_receipt['blockNumber'],
-            block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
+            block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
         transaction.save()
 
@@ -91,6 +96,7 @@ class Registrar():
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
+        from dashboard_app.models import Transaction
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
@@ -120,7 +126,7 @@ class Registrar():
             npi
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-
+        from dashboard_app.models import Transaction
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
@@ -252,7 +258,7 @@ class Patient(Roles):
             prescriber.contract_address
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-
+        from dashboard_app.models import Transaction
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
@@ -279,7 +285,7 @@ class Patient(Roles):
             prescriber.contract_address
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-
+        from dashboard_app.models import Transaction
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
             gas_usage=tx_receipt['gasUsed'],
@@ -310,6 +316,7 @@ class Patient(Roles):
             pharmacy.contract_address
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
@@ -341,6 +348,7 @@ class Patient(Roles):
             pharmacy.contract_address
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
@@ -366,6 +374,7 @@ class Patient(Roles):
 
         tx_hash = self.contract.functions.requestFill(prescription_address).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
@@ -446,6 +455,7 @@ class Prescriber(Provider):
             refills
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
@@ -480,6 +490,7 @@ class Prescriber(Provider):
             refill_count
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
@@ -543,6 +554,7 @@ class Pharmacy(Provider):
             prescription_address
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
@@ -574,6 +586,7 @@ class Pharmacy(Provider):
             fill_count
         ).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),
@@ -599,6 +612,8 @@ class Pharmacy(Provider):
 
         tx_hash = self.contract.functions.requestRefill(prescription_address).transact(self.sender)
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+
+        from dashboard_app.models import Transaction
 
         transaction = Transaction(
             transaction_hash=tx_hash.hex(),

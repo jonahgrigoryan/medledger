@@ -12,7 +12,7 @@ class Transaction(models.Model):
         return self.transaction_hash
 
     class Meta:
-        app_label = 'dashboard'
+        app_label = 'dashboard_app'
   
 
 

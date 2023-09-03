@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from users import views as user_views
-from dashboard import views as dashboard_views
+from dashboard_app import views as dashboard_app_views
 
 
 urlpatterns = [
@@ -27,7 +27,7 @@ urlpatterns = [
     path('account/', user_views.account, name='account'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('base.html', dashboard_views.base_view, name='base-view'),
+    path('base.html', dashboard_app_views.base_view, name='base-view'),
 
-    path('', include('dashboard.urls')),
+    path('', include('dashboard_app.urls')),
 ]

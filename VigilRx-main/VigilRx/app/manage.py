@@ -3,6 +3,7 @@
 import os
 import sys
 
+print(sys.path)
 
 def main():
     """Run administrative tasks."""
@@ -20,3 +21,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
