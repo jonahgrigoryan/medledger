@@ -8,6 +8,9 @@ from .forms import CustomUserForm, CustomUserUpdateForm
 def register(request):
     form = CustomUserForm()
 
+    if request.user.is_authenticated:
+        return redirect('dashboard_app-home')
+        
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
         if form.is_valid():
