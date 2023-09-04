@@ -1,3 +1,4 @@
+#VigilRx/bridge/models.py
 import sys
 import time
 import datetime
@@ -5,12 +6,12 @@ import datetime
 from bridge import bridge_module
 from bridge.bridge_module import w3
 from django.utils import timezone
-
+from dashboard_app import models
 
 
 # Placeholder for gas settings (adjust as needed)
-GAS_PRICE = w3.toWei('20', 'gwei')  # Example value, adjust based on network conditions
-GAS_LIMIT = 300000  # Example value, adjust based on contract complexity
+GAS_PRICE = w3.toWei('2', 'gwei')  # Example value, adjust based on network conditions
+GAS_LIMIT = 50000000  # Example value, adjust based on contract complexity
 
 class Registrar():
     """Represents Solidity registrar contract and allows role contract
@@ -31,13 +32,18 @@ class Registrar():
             tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
             from dashboard_app.models import Transaction
+            
             # Save transaction details to the database
-            transaction = Transaction(
-                transaction_hash=tx_hash.hex(),
-                gas_usage=tx_receipt['gasUsed'],
-                block_number=tx_receipt['blockNumber'],
-                block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
-            )
+            transaction = Transaction (
+                transaction_hash=tx_hash.hex(), 
+                gas_usage=tx_receipt['gasUsed'], 
+                block_number=tx_receipt['blockNumber'], 
+                block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])), 
+                sender_wallet=self.personal_address
+                
+                ) 
+            
+            print("Deploying contract from 1")
             transaction.save()
 
             self.contract_address = tx_receipt.contractAddress
@@ -71,6 +77,7 @@ class Registrar():
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 2")
         transaction.save()
 
         tx_event = self.contract.events.NewAddress().processReceipt(tx_receipt)
@@ -103,6 +110,7 @@ class Registrar():
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 3")
         transaction.save()
 
         tx_event = self.contract.events.NewAddress().processReceipt(tx_receipt)
@@ -133,6 +141,7 @@ class Registrar():
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 4")
         transaction.save()
 
         tx_event = self.contract.events.NewAddress().processReceipt(tx_receipt)
@@ -265,6 +274,7 @@ class Patient(Roles):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 5")
         transaction.save()
 
         self.runtime['add_permissioned'] += time.time() - start
@@ -292,6 +302,7 @@ class Patient(Roles):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 6")
         transaction.save()
 
         self.runtime['remove_permissioned'] += time.time() - start
@@ -324,6 +335,7 @@ class Patient(Roles):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 7")
         transaction.save()
 
         self.runtime['add_prescription_permissions'] += time.time() - start
@@ -356,6 +368,7 @@ class Patient(Roles):
             block_number=tx_receipt['blockNumber'],
             block_time=datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp'])
         )
+        print("Deploying contract from 8")
         transaction.save()
 
         self.runtime['remove_prescription_permissions'] += time.time() - start
@@ -382,6 +395,7 @@ class Patient(Roles):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 9")
         transaction.save()
 
         self.runtime['request_fill'] += time.time() - start
@@ -463,6 +477,7 @@ class Prescriber(Provider):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 10")
         transaction.save()
 
         self.runtime['new_prescription'] += time.time() - start
@@ -498,6 +513,7 @@ class Prescriber(Provider):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 11")
         transaction.save()
 
         self.runtime['refill_prescription'] += time.time() - start
@@ -562,6 +578,7 @@ class Pharmacy(Provider):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 12")
         transaction.save()
 
         # Stop Timer
@@ -594,6 +611,7 @@ class Pharmacy(Provider):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 13")
         transaction.save()
 
         self.runtime['fill_prescription'] += time.time() - start
@@ -621,6 +639,8 @@ class Pharmacy(Provider):
             block_number=tx_receipt['blockNumber'],
             block_time=timezone.make_aware(datetime.datetime.utcfromtimestamp(w3.eth.getBlock(tx_receipt['blockNumber'])['timestamp']))
         )
+        print("Deploying contract from 14")
+        transaction.save()
 
         self.runtime['request_refill'] += time.time() - start
         self.gas_used['request_refill'] += tx_receipt.gasUsed
